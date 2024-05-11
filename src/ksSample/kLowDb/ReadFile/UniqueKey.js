@@ -14,11 +14,12 @@ let StartFunc = async ({ inKeyName }) => {
   const db = LocalStartFuncPullData.inDb;
   let LocalarrayOfObjects = db.data;
 
-  const LocalFindId = getUniqueArr(LocalarrayOfObjects, LocalKeyName);
+  const LocalArrayToSend = getUniqueArr(LocalarrayOfObjects, LocalKeyName);
 
   LocalReturnData.KTF = true;
-  LocalReturnData.JsonData = LocalFindId;
+  LocalReturnData.JsonData = LocalArrayToSend.sort();
 
+  
   return await LocalReturnData;
 };
 
