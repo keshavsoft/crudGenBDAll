@@ -1,56 +1,25 @@
 import { StartFunc as StartFuncInitializeSequelizeWithTableName } from "../modals/initializeSequelizeWithTableName.js";
+import { StartFunc as StartFuncPrimaryKey } from "../modals/GetTableInfo/PrimaryKey.js";
 
-let StartFunc = async ({ inId }) => {
-  let LocalId = inId;
+let StartFunc = async ({inId }) => {
 
   const LocalTableData = await StartFuncInitializeSequelizeWithTableName();
-
-  let LocalFromDelete;
-
-  const LocalFindId = await LocalTableData.findAll({
-    where: {
-      id: inId,
-    },
-  });
-
-  if (LocalFindId.length === 0) {
-    return await { KTF: false, KReason: "Id not found in data" };
-  }
-
+  const LocalPrimaryKeyName= await StartFuncPrimaryKey();
+  const LocalPrimaryKeyValue = inId;
   try {
-    LocalFromDelete = await LocalTableData.destroy({ where: { id: LocalId } });
+    const recordToDelete = await LocalTableData.findOne({
+      where: {
+        [LocalPrimaryKeyName]: LocalPrimaryKeyValue
+      }
+    });
+    await recordToDelete.destroy();
+    return recordToDelete;
   } catch (error) {
-    return await error;
+    return {
+      KTF: false,
+      KReason: { ErrorFrom: process.cwd(), sqliteError: error}
+    };
   }
-
-  return await LocalFromDelete;
 };
 
 export { StartFunc };
-// let StartFunc = async ({inId}) => {
-//     let LocalId=inId;
-
-//     const sequelize = StartFuncInitializeSequelize();
-
-//     const Tickets = sequelize.define('sample', {
-//         Name: {
-//             type: DataTypes.STRING,
-//             allowNull: false,
-//         }
-//     }, { freezeTableName: true }
-//     );
-
-//     let LocalFromDelete;
-
-//     try {
-//         LocalFromDelete = await Tickets.destroy({ where: { id: LocalId } });
-
-//     } catch (error) {
-//         return await error;
-
-//     }
-
-//     return await LocalFromDelete;
-// };
-
-// export { StartFunc };

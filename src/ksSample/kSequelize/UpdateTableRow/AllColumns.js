@@ -13,7 +13,6 @@ let StartFunc = async ({ inDataToUpdate, inId }) => {
         [LocalPrimaryKeyName]: LocalPrimaryKeyValue
       }
     });
-    //console.log("recordToUpdate:",recordToUpdate);
     if (!recordToUpdate) {
       return {
         KTF: false,
@@ -21,7 +20,6 @@ let StartFunc = async ({ inDataToUpdate, inId }) => {
       };
     }
     await recordToUpdate.update(localInDataToUpdate);
-    //await recordToUpdate.destroy();
     return recordToUpdate;
   } catch (error) {
     return {
