@@ -30,6 +30,7 @@ let WsOnConnection = (ws, req) => {
     // });
 
     ws.on('message', (data, isBinary) => {
+        console.log(("websocket data from client : ", data.toString()));
         // CommonOnMessage({
         //     inData: data
         // });
