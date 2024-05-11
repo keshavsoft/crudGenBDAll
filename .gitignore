@@ -1,0 +1,12 @@
+node_modules/
+
+bin/
+
+KData/
+public/
+
+.env
+
+.vscode
+
+.log
