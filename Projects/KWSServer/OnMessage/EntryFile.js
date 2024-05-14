@@ -4,7 +4,7 @@
 // import { StartFunc as CommonMessageAsJson } from "./MessageAsJson/EntryFile.js";
 import { StartFunc as CommonMessageAsString } from "./MessageAsString/EntryFile.js";
 
-let StartFunc = ({ inData, inws }) => {
+let StartFunc = ({ inData, inws,inClients }) => {
     let LocalData = inData;
 
     try {
@@ -17,7 +17,7 @@ let StartFunc = ({ inData, inws }) => {
 
     };
 
-    CommonMessageAsString({ inDataAsString: LocalData.toString(), inws });
+    CommonMessageAsString({ inDataAsString: LocalData.toString(), inws,inClients });
 };
 
 // module.exports = StartFunc;
