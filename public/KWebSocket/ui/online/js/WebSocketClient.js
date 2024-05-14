@@ -20,7 +20,14 @@ let jFLocalEstablishWebSocket = () => {
     };
 
     webSocket.onmessage = (event) => {
-        console.log("event : ", event.data);
+        const data = JSON.parse(event.data);
+
+        if (data.type === 'user online') {
+            console.log("User online:",data.userId);
+        }
+        if(data.type === 'userId'){
+            console.log("User id:",data.userId);
+        }
     };;
 
     webSocket.onclose = function (e) {
