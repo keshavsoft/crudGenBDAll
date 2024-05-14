@@ -1,4 +1,5 @@
 import { WebSocketServer } from 'ws';
+import WebSocket from "ws";
 import { StartFunc as CommoninsertToClients } from './insertToClients.js';
 
 let wss;
@@ -19,6 +20,23 @@ let WsOnConnection = (ws, req) => {
     CommoninsertToClients({
         inClients: clients,
         ws
+    });
+
+    let id = clients.get(ws).id;
+
+    ws.send(JSON.stringify({type: 'userId', userId: id}));
+
+
+    wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          ws.send(JSON.stringify({ type: 'user online', userId: clients.get(client).id })); // Customize message, extract user ID from URL
+        }
+    });
+    
+    wss.clients.forEach((client) => {
+        if (client !== ws && client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify({ type: 'user online', userId: id })); // Customize message, extract user ID from URL
+        }
     });
 
     // CommonSaveToJsonOnConnections({
