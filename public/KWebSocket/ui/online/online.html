@@ -66,16 +66,11 @@
                         <li class="sidebar-title">Menu</li>
 
                         <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="../online/online.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Online</span>
                             </a>
-
-
                         </li>
-
-                        
-
                     </ul>
                 </div>
             </div>
@@ -91,11 +86,11 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <h3>Comment</h3>
-                            <p class="text-subtitle text-muted">
+                            <h3>Online Chat</h3>
+                            <!-- <p class="text-subtitle text-muted">
                                 A component that can be used to comment on the content of your website. It can be used
                                 to comment on a post, image, or video.
-                            </p>
+                            </p> -->
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -110,11 +105,11 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
-                            <button class="btn btn-primary" id="getOnlineUsers">Show Users</button>
-                            <h4 class="card-title">Basic Comment</h4>
+                            <button class="btn btn-primary" id="getOnlineUsers">Active Users</button>
+                            <!-- <h4 class="card-title">Basic Comment</h4> -->
                         </div>
                         <div class="card-body" id = "card-bodyId">
-                            <div class="comment">
+                        <!--<div class="comment">
                                 <div class="comment-header">
                                     <div class="pr-50">
                                         <div class="avatar avatar-2xl">
@@ -165,7 +160,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </section>
             </div>
@@ -225,13 +220,18 @@
 
     <script>
         const template = document.getElementById('templateId');
+        
         function addComment(profileId) {
             const cardBody = document.getElementById('card-bodyId');
-            template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/6.jpg" alt="Avatar">';
+            template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/2.jpg" alt="Avatar">';
             template.content.getElementById('comment-profileNameId').textContent = profileId;
             template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
             template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
-            cardBody.appendChild(template.content.cloneNode(true));
+            const existingComments = cardBody.getElementsByClassName('comment-profileName');
+            const profileNames = Array.from(existingComments).map(comment => comment.textContent);
+            if (!profileNames.includes(profileId)) {
+                cardBody.appendChild(template.content.cloneNode(true));
+            }
         }
         
         function displayOnlineClients(inData){
@@ -240,7 +240,8 @@
             });
         }
 
-        document.getElementById("getOnlineUsers").addEventListener("click", function(){
+        document.getElementById("getOnlineUsers").addEventListener("click", function()
+        {
             webSocket.send("returnOnlineClients");
         });
 
