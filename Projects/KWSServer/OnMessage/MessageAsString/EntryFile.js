@@ -15,7 +15,7 @@ let StartFunc = ({ inDataAsString, inws, inClients }) => {
             console.log( value);
             LocalArray.push(value);
         }
-        inws.send(JSON.stringify(LocalArray));
+        inws.send(JSON.stringify({type: 'returnOnlineClients', res: LocalArray}));
     }
     // console.log("string : ", LocalDataAsSting, new Date());
 };
