@@ -219,32 +219,19 @@
     <script src="./js/WebSocketClient.js"></script>
 
     <script>
-        const template = document.getElementById('templateId');
-        
-        function addComment(profileId) {
-            const cardBody = document.getElementById('card-bodyId');
-            template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/2.jpg" alt="Avatar">';
-            template.content.getElementById('comment-profileNameId').textContent = profileId;
-            template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
-            template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
-            const existingComments = cardBody.getElementsByClassName('comment-profileName');
-            const profileNames = Array.from(existingComments).map(comment => comment.textContent);
-            if (!profileNames.includes(profileId)) {
-                cardBody.appendChild(template.content.cloneNode(true));
-            }
-        }
-        
-        function displayOnlineClients(inData){
-            inData.forEach((user) => {
-                addComment(user.id);
-            });
-        }
-
         document.getElementById("getOnlineUsers").addEventListener("click", function()
         {
             webSocket.send("returnOnlineClients");
         });
 
+
+        let jFSendName=()=>{
+            let jVarLocalObjectToSend={};
+            jVarLocalObjectToSend.Type="ChangeName";
+            jVarLocalObjectToSend.Message="KeshavSoft";
+            
+webSocket.send(JSON.stringify(jVarLocalObjectToSend));
+        };
     </script>
 
 </body>
