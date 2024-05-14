@@ -186,14 +186,14 @@
         <div class="comment">
             <div class="comment-header">
                 <div class="pr-50">
-                    <div class="avatar avatar-2xl">
+                    <div class="avatar avatar-2xl" id="avatarId">
                         <img src="../assets/compiled/jpg/2.jpg" alt="Avatar">
                     </div>
                 </div>
                 <div class="comment-body">
                     <div class="comment-profileName" id="comment-profileNameId">Muhammad Alfian </div>
-                    <div class="comment-time">8 seconds ago</div>
-                    <div class="comment-message">
+                    <div class="comment-time" id="comment-timeId">8 seconds ago</div>
+                    <div class="comment-message" id="comment-messageId">
                         <p class="list-group-item-text truncate mb-20">Your <a
                                 href="https://github.com/alfianchii/confess"
                                 target="_blank">confession</a> will be processed. Stay tuned!</p>
@@ -226,7 +226,10 @@
         const template = document.getElementById('templateId');
         function addComment() {
             const cardBody = document.getElementById('card-bodyId');
+            template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/6.jpg" alt="Avatar">';
             template.content.getElementById('comment-profileNameId').textContent = 'Indra';
+            template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
+            template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
             cardBody.appendChild(template.content.cloneNode(true));
         }
     </script>
