@@ -16,4 +16,5 @@ function uuidv4() {
     });
 };
 
-module.exports = StartFunc;
+//module.exports = StartFunc;
+export { StartFunc };
