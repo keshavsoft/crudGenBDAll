@@ -1,6 +1,7 @@
 import { WebSocketServer } from 'ws';
 import WebSocket from "ws";
 import { StartFunc as CommoninsertToClients } from './insertToClients.js';
+import { StartFunc as CommonOnMessage } from "./OnMessage/EntryFile.js";
 
 let wss;
 
@@ -24,20 +25,16 @@ let WsOnConnection = (ws, req) => {
 
     let id = clients.get(ws).id;
 
-    ws.send(JSON.stringify({type: 'userId', userId: id}));
+    // ws.send(JSON.stringify({type: 'userId', userId: id}));
 
+    // wss.clients.forEach((client) => {
+    //     if (client !== ws && client.readyState === WebSocket.OPEN) {
+    //       client.send(JSON.stringify({ type: 'user online', userId: id })); // Customize message, extract user ID from URL
+    //       ws.send(JSON.stringify({ type: 'user online', userId: clients.get(client).id }));
+    //     }
+    // });
 
-    wss.clients.forEach((client) => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify({ type: 'user online', userId: clients.get(client).id })); // Customize message, extract user ID from URL
-        }
-    });
-    
-    wss.clients.forEach((client) => {
-        if (client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send(JSON.stringify({ type: 'user online', userId: id })); // Customize message, extract user ID from URL
-        }
-    });
+    console.log("Number of users online: ", clients.size);
 
     // CommonSaveToJsonOnConnections({
     //     inVerifyToken: LocalFromVerifyToken,
@@ -49,9 +46,10 @@ let WsOnConnection = (ws, req) => {
     ws.on('message', (data, isBinary) => {
         let k1 = clients.get(ws);
         console.log(data.toString(), clients.keys.length, k1);
-        // CommonOnMessage({
-        //     inData: data
-        // });
+        CommonOnMessage({
+            inData: data,
+            inws: ws
+        });
 
         setTimeout(function timeout() {
             ws.send(Date.now());
@@ -59,8 +57,16 @@ let WsOnConnection = (ws, req) => {
     });
 
     ws.on('close', () => {
-        console.log('closed');
+        wss.clients.forEach((client) => {
+            if (client !== ws && client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify({ type: 'user offline', userId: id })); // Customize message, extract user ID from URL
+            }
+        });
+        clients.delete(ws);
+        console.log("Number of users online: ", clients.size);
     });
+
+    
 
     ws.send(Date.now());
 };
