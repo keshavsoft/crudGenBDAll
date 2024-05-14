@@ -110,6 +110,7 @@
                 <section class="section">
                     <div class="card">
                         <div class="card-header">
+                            <button class="btn btn-primary" id="getOnlineUsers">Show Users</button>
                             <h4 class="card-title">Basic Comment</h4>
                         </div>
                         <div class="card-body" id = "card-bodyId">
@@ -224,14 +225,25 @@
 
     <script>
         const template = document.getElementById('templateId');
-        function addComment() {
+        function addComment(profileId) {
             const cardBody = document.getElementById('card-bodyId');
             template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/6.jpg" alt="Avatar">';
-            template.content.getElementById('comment-profileNameId').textContent = 'Indra';
+            template.content.getElementById('comment-profileNameId').textContent = profileId;
             template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
             template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
             cardBody.appendChild(template.content.cloneNode(true));
         }
+        
+        function displayOnlineClients(inData){
+            inData.forEach((user) => {
+                addComment(user.id);
+            });
+        }
+
+        document.getElementById("getOnlineUsers").addEventListener("click", function(){
+            webSocket.send("returnOnlineClients");
+        });
+
     </script>
 
 </body>
