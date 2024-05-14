@@ -48,7 +48,8 @@ let WsOnConnection = (ws, req) => {
         console.log(data.toString(), clients.keys.length, k1);
         CommonOnMessage({
             inData: data,
-            inws: ws
+            inws: ws,
+            inClients: clients
         });
 
         setTimeout(function timeout() {
