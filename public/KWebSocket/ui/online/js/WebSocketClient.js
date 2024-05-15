@@ -38,18 +38,19 @@ function displayOnlineClients(inData) {
     const cardBody = document.getElementById('card-bodyId');
     cardBody.innerHTML = "";
 
-    inData.forEach((user) => {
-        addComment(user.id, user.Name);
+    inData.forEach((user, loopIndex) => {
+        addComment(user.id, user.Name, loopIndex+1);
     });
 };
 
-function addComment(profileId,profileName) {
+function addComment(profileId,profileName, loopIndex) {
     const template = document.getElementById('templateId');
 
     const cardBody = document.getElementById('card-bodyId');
     // template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/2.jpg" alt="Avatar">';
     template.content.getElementById('comment-profileNameId').textContent = profileName;
     template.content.getElementById('comment-messageId').textContent = profileId;
+    template.content.getElementById('comment-timeId').textContent = loopIndex;
     cardBody.appendChild(template.content.cloneNode(true));
 
     // template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
