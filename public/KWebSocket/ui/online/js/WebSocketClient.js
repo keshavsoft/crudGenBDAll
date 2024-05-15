@@ -29,6 +29,10 @@ let jFLocalEstablishWebSocket = () => {
         if (data.type === 'GetWebSocketId') {
             localStorage.setItem('webSocketId', data.webSocketId);
         };
+        if(data.type === 'sendMessage'){
+            console.log("data.Message",data.Message);
+            console.log("data.fromId",data.fromId);
+        }
     };;
 
     webSocket.onclose = function (e) {
