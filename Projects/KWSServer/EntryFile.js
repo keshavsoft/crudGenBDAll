@@ -49,11 +49,11 @@ let WsOnConnection = (ws, req) => {
     });
 
     ws.on('close', () => {
-        wss.clients.forEach((client) => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-              client.send(JSON.stringify({ type: 'user offline', userId: id })); // Customize message, extract user ID from URL
-            }
-        });
+        // wss.clients.forEach((client) => {
+        //     if (client !== ws && client.readyState === WebSocket.OPEN) {
+        //       client.send(JSON.stringify({ type: 'user offline', userId: localWebSocketData.id })); // Customize message, extract user ID from URL
+        //     }
+        // });
         clients.delete(ws);
         console.log("Number of users online: ", clients.size);
     });
