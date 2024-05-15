@@ -1,19 +1,18 @@
+import { StartFunc as StartFuncreturnOnlineClients } from "./returnOnlineClients.js";
+import { StartFunc as StartFuncGetWebSocketId } from "./getWebSocketId.js";
+import { StartFunc as StartFuncreturnOnlineClientsWOMe } from "./returnOnlineClientsWOMe.js";
+
 let StartFunc = ({ inDataAsString, inws, inClients }) => {
     let LocalDataAsSting = inDataAsString;
     console.log("LocalDataAsSting : ", LocalDataAsSting);
     if (LocalDataAsSting === "returnOnlineClients") {
-        let LocalArray = []
-
-        for (let [key, value] of inClients) {
-            LocalArray.push(value);
-        };
-
-        inws.send(JSON.stringify({ type: 'returnOnlineClients', res: LocalArray }));
+        StartFuncreturnOnlineClients({ inDataAsString: LocalDataAsSting, inws: inws, inClients: inClients});
     };
     if (LocalDataAsSting === "GetWebSocketId") {
-        let localWebSocketData=inClients.get(inws);
-
-        inws.send(JSON.stringify({ type: 'GetWebSocketId', webSocketId: localWebSocketData.id }));
+        StartFuncGetWebSocketId({ inDataAsString: LocalDataAsSting, inws: inws, inClients: inClients});
+    };
+    if (LocalDataAsSting === "returnOnlineClientsWOMe") {
+        StartFuncreturnOnlineClientsWOMe({ inDataAsString: LocalDataAsSting, inws: inws, inClients: inClients});
     };
 };
 
