@@ -3,7 +3,7 @@ import { StartFunc as CommonMessageAsString } from "./MessageAsString/EntryFile.
 
 let StartFunc = ({ inData, inws,inClients }) => {
     let LocalData = inData;
-
+    // console.log("LocalData : ", LocalData);
     try {
      let   LocalDataAsJson = JSON.parse(LocalData);
 // console.log("aaaaaaaaaaaa : ",LocalDataAsJson);

@@ -36,6 +36,7 @@ let WsOnConnection = (ws, req) => {
 
     ws.on('message', (data, isBinary) => {
         let k1 = clients.get(ws);
+        
 
         CommonOnMessage({
             inData: data,
