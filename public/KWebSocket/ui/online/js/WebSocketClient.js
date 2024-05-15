@@ -39,20 +39,21 @@ function displayOnlineClients(inData) {
     cardBody.innerHTML = "";
 
     inData.forEach((user) => {
-        addComment(user.id);
+        addComment(user.id, user.Name);
     });
 };
 
-function addComment(profileId) {
+function addComment(profileId,profileName) {
     const template = document.getElementById('templateId');
 
     const cardBody = document.getElementById('card-bodyId');
     // template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/2.jpg" alt="Avatar">';
-    template.content.getElementById('comment-profileNameId').textContent = profileId;
+    template.content.getElementById('comment-profileNameId').textContent = profileName;
+    template.content.getElementById('comment-messageId').textContent = profileId;
     cardBody.appendChild(template.content.cloneNode(true));
 
     // template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
-    // template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
+    
     // const existingComments = cardBody.getElementsByClassName('comment-profileName');
     // const profileNames = Array.from(existingComments).map(comment => comment.textContent);
     // if (!profileNames.includes(profileId)) {
