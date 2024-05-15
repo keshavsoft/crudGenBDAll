@@ -16,6 +16,7 @@ let jFLocalEstablishWebSocket = () => {
     webSocket = new WebSocket(jVarLocalUrlForWS);
 
     webSocket.onopen = (event) => {
+        document.getElementById("OnlinePeopleId").style.color = "green";
         webSocket.send("k1");
     };
 
@@ -29,13 +30,14 @@ let jFLocalEstablishWebSocket = () => {
         if (data.type === 'GetWebSocketId') {
             localStorage.setItem('webSocketId', data.webSocketId);
         };
-        if(data.type === 'sendMessage'){
-            console.log("data.Message",data.Message);
-            console.log("data.fromId",data.fromId);
+        if (data.type === 'sendMessage') {
+            console.log("data.Message", data.Message);
+            console.log("data.fromId", data.fromId);
         }
     };;
 
     webSocket.onclose = function (e) {
+        document.getElementById("OnlinePeopleId").style.color = "red";
     };
 };
 
@@ -44,11 +46,11 @@ function displayOnlineClients(inData) {
     cardBody.innerHTML = "";
 
     inData.forEach((user, loopIndex) => {
-        addComment(user.id, user.Name, loopIndex+1);
+        addComment(user.id, user.Name, loopIndex + 1);
     });
 };
 
-function addComment(profileId,profileName, loopIndex) {
+function addComment(profileId, profileName, loopIndex) {
     const template = document.getElementById('templateId');
 
     const cardBody = document.getElementById('card-bodyId');
@@ -59,7 +61,7 @@ function addComment(profileId,profileName, loopIndex) {
     cardBody.appendChild(template.content.cloneNode(true));
 
     // template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
-    
+
     // const existingComments = cardBody.getElementsByClassName('comment-profileName');
     // const profileNames = Array.from(existingComments).map(comment => comment.textContent);
     // if (!profileNames.includes(profileId)) {
