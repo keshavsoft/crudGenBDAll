@@ -21,19 +21,22 @@ let jFLocalEstablishWebSocket = () => {
 
     webSocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-
-        if(data.type === 'returnOnlineClients'){
+        console.log("event : ", data);
+        if (data.type === 'returnOnlineClients') {
             displayOnlineClients(data.res);
         };
-};;
+        if (data.type === 'GetWebSocketId') {
+            localStorage.setItem('webSocketId', data.webSocketId);
+        };
+    };;
 
     webSocket.onclose = function (e) {
     };
 };
- 
-function displayOnlineClients(inData){
+
+function displayOnlineClients(inData) {
     const cardBody = document.getElementById('card-bodyId');
-    cardBody.innerHTML="";
+    cardBody.innerHTML = "";
 
     inData.forEach((user) => {
         addComment(user.id);
@@ -42,12 +45,12 @@ function displayOnlineClients(inData){
 
 function addComment(profileId) {
     const template = document.getElementById('templateId');
-        
+
     const cardBody = document.getElementById('card-bodyId');
     // template.content.getElementById('avatarId').innerHTML = '<img src="../assets/compiled/jpg/2.jpg" alt="Avatar">';
     template.content.getElementById('comment-profileNameId').textContent = profileId;
     cardBody.appendChild(template.content.cloneNode(true));
-    
+
     // template.content.getElementById('comment-timeId').textContent = '5 seconds ago';
     // template.content.getElementById('comment-messageId').textContent = 'Hello, World!';
     // const existingComments = cardBody.getElementsByClassName('comment-profileName');

@@ -245,6 +245,10 @@
             jVarLocalObjectToSend.Message="KeshavSoft";      
             webSocket.send(JSON.stringify(jVarLocalObjectToSend));
         };
+        let jFGetWebSocketId = () => {
+            webSocket.send("GetWebSocketId");
+            
+        };
     </script>
 
 </body>
