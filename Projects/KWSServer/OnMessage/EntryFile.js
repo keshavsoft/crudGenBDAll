@@ -1,4 +1,4 @@
- import { StartFunc as CommonMessageAsJson } from "./MessageAsJson/EntryFile.js";
+import { StartFunc as CommonMessageAsJson } from "./MessageAsJson/EntryFile.js";
 import { StartFunc as CommonMessageAsString } from "./MessageAsString/EntryFile.js";
 
 let StartFunc = ({ inData, inws,inClients }) => {
@@ -6,7 +6,7 @@ let StartFunc = ({ inData, inws,inClients }) => {
 
     try {
      let   LocalDataAsJson = JSON.parse(LocalData);
-console.log("aaaaaaaaaaaa : ",LocalDataAsJson);
+// console.log("aaaaaaaaaaaa : ",LocalDataAsJson);
         CommonMessageAsJson({ inDataAsJson: LocalDataAsJson ,inws,inClients});
 
         return;
