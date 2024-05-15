@@ -71,11 +71,16 @@
                                 <span>Online</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item  ">
-                            <a href="../Chat/chat.html" class='sidebar-link'>
+                            <a href="../chat/chat.html" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Chat</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item  ">
+                            <a href="../profile/profile.html" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Profile</span>
                             </a>
                         </li>
                     </ul>
@@ -115,8 +120,8 @@
                             <button class="btn btn-primary" id="getOnlineUsers">Active Users</button>
                             <!-- <h4 class="card-title">Basic Comment</h4> -->
                         </div>
-                        <div class="card-body" id = "card-bodyId">
-                        <!--<div class="comment">
+                        <div class="card-body" id="card-bodyId">
+                            <!--<div class="comment">
                                 <div class="comment-header">
                                     <div class="pr-50">
                                         <div class="avatar avatar-2xl">
@@ -168,7 +173,7 @@
                                 </div>
                             </div>
                         </div>-->
-                    </div>
+                        </div>
                 </section>
             </div>
 
@@ -197,17 +202,15 @@
                     <div class="comment-profileName" id="comment-profileNameId">Muhammad Alfian </div>
                     <div class="comment-time" id="comment-timeId">8 seconds ago</div>
                     <div class="comment-message" id="comment-messageId">
-                        <p class="list-group-item-text truncate mb-20">Your <a
-                                href="https://github.com/alfianchii/confess"
-                                target="_blank">confession</a> will be processed. Stay tuned!</p>
+                        
                     </div>
                     <div class="comment-actions">
-                        <button class="btn icon icon-left btn-primary me-2 text-nowrap"><i
-                                class="bi bi-eye-fill"></i> Show</button>
+                        <button class="btn icon icon-left btn-primary me-2 text-nowrap"><i class="bi bi-eye-fill"></i>
+                            Show</button>
                         <button class="btn icon icon-left btn-warning me-2 text-nowrap"><i
                                 class="bi bi-pencil-square"></i> Edit</button>
-                        <button class="btn icon icon-left btn-danger me-2 text-nowrap"><i
-                                class="bi bi-x-circle"></i> Remove</button>
+                        <button class="btn icon icon-left btn-danger me-2 text-nowrap"><i class="bi bi-x-circle"></i>
+                            Remove</button>
                     </div>
                 </div>
             </div>
@@ -226,16 +229,17 @@
     <script src="./js/WebSocketClient.js"></script>
 
     <script>
-        document.getElementById("getOnlineUsers").addEventListener("click", function()
-        {
+        document.getElementById("getOnlineUsers").addEventListener("click", function () {
             webSocket.send("returnOnlineClients");
         });
 
 
-        let jFSendName=()=>{
-            let jVarLocalObjectToSend={};
-            jVarLocalObjectToSend.Type="ChangeName";
-            jVarLocalObjectToSend.Message="KeshavSoft";      
+        let jFSendName = () => {
+            let profileName = localStorage.getItem("webSocketName");
+            let jVarLocalObjectToSend = {};
+            jVarLocalObjectToSend.Type = "ChangeName";
+            jVarLocalObjectToSend.Message = profileName;
+
             webSocket.send(JSON.stringify(jVarLocalObjectToSend));
         };
     </script>
