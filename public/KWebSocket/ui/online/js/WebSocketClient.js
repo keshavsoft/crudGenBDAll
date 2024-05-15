@@ -23,6 +23,7 @@ let jFLocalEstablishWebSocket = () => {
         const data = JSON.parse(event.data);
         console.log("event : ", data);
         if (data.type === 'returnOnlineClients') {
+            console.log(data.res.id);
             displayOnlineClients(data.res);
         };
         if (data.type === 'GetWebSocketId') {
