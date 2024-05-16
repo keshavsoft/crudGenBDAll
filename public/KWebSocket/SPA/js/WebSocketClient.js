@@ -4,24 +4,26 @@ let jVarLocalUrlForWS;
 if (location.protocol === "https:") {
     jVarLocalUrlForWS = "wss://" + jVarLocalHostName;
 }
-if (location.protocol === "http:") {
+if (location.protocol === "http:"){
     jVarLocalUrlForWS = "ws://" + jVarLocalHostName;
 }
+
+// let webSocket;
 let StartFunc = () => {
     jFLocalEstablishWebSocket();
 };
 
 let jFLocalEstablishWebSocket = () => {
-
     webSocket = new WebSocket(jVarLocalUrlForWS);
-
     webSocket.onopen = (event) => {
+        console.log("WebSocket is open now.");
         document.getElementById("OnlinePeopleId").style.color = "green";
         webSocket.send("k1");
     };
 
     webSocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
+        console.log(webSocket,"webSocket ra mahithuuuuuuu")
         console.log("event : ", data.type);
         if (data.type === 'returnOnlineClientsWOMe') {
             console.log("res length::::",data.res.length);
@@ -34,9 +36,11 @@ let jFLocalEstablishWebSocket = () => {
             console.log("data.Message", data.Message);
             console.log("data.fromId", data.fromId);
         }
+
     };;
 
     webSocket.onclose = function (e) {
+        console.log("Socket is closed. Reconnect will be attempted in 1 second.");
         document.getElementById("OnlinePeopleId").style.color = "red";
     };
 };
@@ -73,13 +77,40 @@ function addComment(profileId, profileName, loopIndex) {
     //     cardBody.appendChild(template.content.cloneNode(true));
     // }
 }
+// console.log("WebSocketClient.js loaded", webSocket);
+// function startchat() {
+//     const chatContent = document.getElementById('chat-content');
+//     const inputMsg = document.getElementById('inputMsg');
+//     const sendBtn = document.getElementById('sendBtn');
+//     console.log("reeeeeey" , chatContent, inputMsg, sendBtn);
+    
+//     let profileId = localStorage.getItem("currentMsgId");
+    
+//     sendBtn.addEventListener('click', () => {
+    
+//         const msg = inputMsg.value;
+//         console.log("msg raaaaa", msg );
+//         if (msg) {
+//             webSocket.send(JSON.stringify({
+//                 Type: "sendMessage",
+//                 toId: profileId,
+//                 Message:msg
+//             }));
+//             inputMsg.value = '';
+    
+//             const chat = document.createElement('div');
+    
+//             chat.classList.add('chat');
+//             chat.innerHTML = `
+//                 <div class="chat-body">
+//                     <div class="chat-message">${msg}</div>
+//                 </div>
+//             `;
+//             chatContent.appendChild(chat);
+//         }
+//     });  
+//     }
 
-
-    // msg.onclick = function(){
-    //     const center = document.getElementById('centerpage');
-    //     center.innerHTML = "";
-        // const template = document.getElementById('chatTemplate');
-        // center.appendChild(template.content.cloneNode(true));
 
 
 
