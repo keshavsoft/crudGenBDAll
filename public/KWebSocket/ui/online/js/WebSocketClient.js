@@ -22,9 +22,9 @@ let jFLocalEstablishWebSocket = () => {
 
     webSocket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        console.log("event : ", data);
-        if (data.type === 'returnOnlineClients') {
-            console.log(data.res.id);
+        console.log("event : ", data.type);
+        if (data.type === 'returnOnlineClientsWOMe') {
+            console.log("res length::::",data.res.length);
             displayOnlineClients(data.res);
         };
         if (data.type === 'GetWebSocketId') {
@@ -42,6 +42,11 @@ let jFLocalEstablishWebSocket = () => {
 };
 
 function displayOnlineClients(inData) {
+    if(inData.length===0){
+        const cardBody = document.getElementById('card-bodyId');
+        cardBody.innerHTML = "NO ONLINE USERS FOUND!";
+        return;
+    }
     const cardBody = document.getElementById('card-bodyId');
     cardBody.innerHTML = "";
 
