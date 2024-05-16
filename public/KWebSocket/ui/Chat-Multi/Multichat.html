@@ -68,25 +68,25 @@
 
                         <li class="sidebar-item  ">
                             <a href="../online/online.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-check-circle-fill"></i>
                                 <span>Online</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="../Chat/chat.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-chat-dots-fill"></i>
                                 <span>Chat</span>
                             </a>
                         </li>
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item  active">
                             <a href="../Chat-Multi/Multichat.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-broadcast"></i>
                                 <span>Multi-Chat</span>
                             </a>
                         </li>
                         <li class="sidebar-item  ">
                             <a href="../profile/profile.html" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-person-circle"></i>
                                 <span>Profile</span>
                             </a>
                         </li>
@@ -137,8 +137,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body pt-4 bg-grey">
-                                    <div class="chat-content">
-                                        <div class="chat">
+                                    <div class="chat-content" id="chat-content">
+                                        <!-- <div class="chat">
                                             <div class="chat-body">
                                                 <div class="chat-message">Hi Alfy, how can i help you?</div>
                                             </div>
@@ -158,7 +158,7 @@
                                             <div class="chat-body">
                                                 <div class="chat-message">That's great! I like it so much :)</div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -167,10 +167,9 @@
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smile"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
                                         </a>
                                         <div class="d-flex flex-grow-1 ms-4">
-                                            <input type="text" class="form-control" placeholder="Type your message..">
+                                            <input type="text" class="form-control" placeholder="Type your message.." id="input-message">
                                         </div>
-                                        <button class="btn btn-primary m-1"><i class="bi bi-send"></i></button>
-                                    </div>
+                                        <button class="btn btn-primary m-1"><i class="bi bi-send" onclick="sendMessage()"></i></button>                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -191,33 +190,23 @@
         </div>
     </div>
     <template id="templateId">
-        <div class="comment">
-            <div class="comment-header">
-                <div class="pr-50">
-                    <div class="avatar avatar-2xl" id="avatarId">
-                        <img src="../assets/compiled/jpg/2.jpg" alt="Avatar">
-                    </div>
-                </div>
-                <div class="comment-body">
-                    <div class="comment-profileName" id="comment-profileNameId">Muhammad Alfian </div>
-                    <div class="comment-time" id="comment-timeId">8 seconds ago</div>
-                    <div class="comment-message" id="comment-messageId">
-                        <p class="list-group-item-text truncate mb-20">Your <a
-                                href="https://github.com/alfianchii/confess"
-                                target="_blank">confession</a> will be processed. Stay tuned!</p>
-                    </div>
-                    <div class="comment-actions">
-                        <button class="btn icon icon-left btn-primary me-2 text-nowrap"><i
-                                class="bi bi-eye-fill"></i> Show</button>
-                        <button class="btn icon icon-left btn-warning me-2 text-nowrap"><i
-                                class="bi bi-pencil-square"></i> Edit</button>
-                        <button class="btn icon icon-left btn-danger me-2 text-nowrap"><i
-                                class="bi bi-x-circle"></i> Remove</button>
-                    </div>
-                </div>
+        <div class="chat">
+            <div class="chat-body">
+                <div class="chat-message" id="chat-message"></div>
             </div>
         </div>
     </template>
+    <script>
+        function sendMessage() {
+            const template = document.getElementById('templateId');
+            const chatContent = document.getElementById('chat-content');
+            let inputMessage = document.getElementById('input-message').value;
+            template.content.getElementById('chat-message').textContent = inputMessage;
+            chatContent.appendChild(template.content.cloneNode(true));
+            document.getElementById('input-message').value=" ";
+            // console.log('Button clicked, sendMessage function executed');
+        };
+    </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
