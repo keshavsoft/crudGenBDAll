@@ -147,4 +147,41 @@
             </div>
         </div>
     </template>
-    
+
+<!-- <script src="./js/WebSocketClient.js"></script> -->
+<script>
+const chatContent = document.getElementById('chat-content');
+const inputMsg = document.getElementById('inputMsg');
+const sendBtn = document.getElementById('sendBtn');
+// console.log("reeeeeey" , chatContent, inputMsg, sendBtn);
+
+let profileId = localStorage.getItem("currentMsgId");
+
+sendBtn.addEventListener('click', () => {
+
+    const msg = inputMsg.value;
+    // console.log("msg raaaaa", msg );
+    console.log("profileId raaaaa", profileId );
+    if (msg) {
+        webSocket.send(JSON.stringify({
+            Type: "sendMessage",
+            toId: profileId,
+            Message:msg
+        }));
+        inputMsg.value = '';
+
+        const chat = document.createElement('div');
+
+        chat.classList.add('chat');
+        chat.innerHTML = `
+            <div class="chat-body">
+                <div class="chat-message">${msg}</div>
+            </div>
+        `;
+        chatContent.appendChild(chat);
+    }
+});  
+
+
+</script>
+
