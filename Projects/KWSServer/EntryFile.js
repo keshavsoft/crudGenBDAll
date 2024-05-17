@@ -1,5 +1,4 @@
 import { WebSocketServer } from 'ws';
-import WebSocket from "ws";
 import { StartFunc as CommoninsertToClients } from './insertToClients.js';
 import { StartFunc as CommonOnMessage } from "./OnMessage/EntryFile.js";
 
@@ -36,7 +35,6 @@ let WsOnConnection = (ws, req) => {
 
     ws.on('message', (data, isBinary) => {
         let k1 = clients.get(ws);
-        
 
         CommonOnMessage({
             inData: data,
