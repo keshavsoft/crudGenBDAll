@@ -12,7 +12,7 @@
     "allowNull": true
   },
   "Credit": {
-    "type": "INTEGER",
+    "type": "FLOAT",
     "allowNull": true
   }
 }
