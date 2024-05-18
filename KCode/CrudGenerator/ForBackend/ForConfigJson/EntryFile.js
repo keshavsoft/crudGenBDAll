@@ -14,13 +14,16 @@ let StartFunc = async ({ inTablesCollection, inFrom, inTo }) => {
         LocalfileNameJsonData.sequelizeConfig.DataPk = ConfigJson.ToDataDetails.DataPk;
         LocalfileNameJsonData.sequelizeConfig.DbName = ConfigJson.ToDataDetails.DbName;
         LocalfileNameJsonData.isSequelize = ConfigJson.isSequelize;
+        LocalfileNameJsonData.sequelizeConfig = ConfigJson.sequelizeConfig;
+
     } else {
         LocalfileNameJsonData.isMongoDb = ConfigJson.isMongoDb;
     };
 
     LocalfileNameJsonData.jsonConfig.tableAndColumns = inTablesCollection;
     LocalfileNameJsonData.jsonConfig.DataPk = ConfigJson.ToDataDetails.DataPk;
-
+    LocalfileNameJsonData.JsonPath = `${ConfigJson.JsonPath}/${ConfigJson.ToDataDetails.DataPk}`;
+    
     fs.writeFileSync(`${LocalTo}/${LocalFileName}`, JSON.stringify(LocalfileNameJsonData));
 };
 
