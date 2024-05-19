@@ -12,7 +12,8 @@
         type="image/png">
 
     <link rel="stylesheet" href="../assets/compiled/css/app.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let webSocket;
     </script>
@@ -23,13 +24,18 @@
         <div id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
+                    <div class="logo">
+                        <a href="index.html">
+                        <h3 id="UserNameId" >User</h3>
+                        </a>
+                    </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="logo">
-                            <a href="index.html">
-                            <h3 id="UserNameId" >User</h3>
-                            </a>
-                        </div>
+                        
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="changeUserName" width="25"
+                            height="25" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                              </svg>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -250,7 +256,33 @@
             // console.log(webSocket.send("returnOnlineClientsWOMe").res);
             webSocket.send("returnOnlineClientsWOMe");
         });
-
+        document.getElementById("changeUserName").addEventListener("click", function () {
+            changeUName();
+        });
+        async function changeUName(){
+        const ipAPI = "//api.ipify.org?format=json";
+        const response = await fetch(ipAPI);
+        const data = await response.json();
+        const inputValue = "";
+        const { value: username } = await Swal.fire({
+            title: "Enter your User Name",
+            input: "text",
+            inputValue,
+            showCancelButton: true,
+            inputValidator: (value) => {
+        if (!value) {
+            return "You need to write something!";
+        }
+    }
+});
+if (username) {
+  Swal.fire(`Your username is ${username}`);
+  let jVarLocalObjectToSend = {};
+            jVarLocalObjectToSend.Type = "ChangeName";
+            jVarLocalObjectToSend.Message = `${username}`;
+            webSocket.send(JSON.stringify(jVarLocalObjectToSend));
+}
+        }
         let jFSendName = () => {
             let jVarLocalObjectToSend = {};
             jVarLocalObjectToSend.Type = "ChangeName";
