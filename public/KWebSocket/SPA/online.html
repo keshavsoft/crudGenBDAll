@@ -93,10 +93,10 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../profile/profile.html" class='sidebar-link'>
+                            <p id="profileId" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
                                 <span>Profile</span>
-                            </a>
+                            </p>
                         </li>
                     </ul>
                 </div>
@@ -104,16 +104,16 @@
         </div>
 
         <div id="main">
-            <header class="mb-3">
+            <header class="mb-3" >
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
 
-            <div class="page-heading">
-                <div class="page-title">
+            <div class="page-heading" id="pageId">
+                <div class="page-title" >
                     <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
+                        <div class="col-12 col-md-6 order-md-1 order-last" id="headId">
                             <h3 id="OnlinePeopleId">Online People</h3>
 
                             <!-- <h3>Comment</h3>
@@ -122,7 +122,7 @@
                                 to comment on a post, image, or video.
                             </p> -->
                         </div>
-                        <div class="col-12 col-md-6 order-md-2 order-first">
+                        <div class="col-12 col-md-6 order-md-2 order-first" id="breadCrumpId">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
@@ -162,6 +162,7 @@
 
 
     </div>
+
     <template id="templateId">
         <div class="comment">
             <div class="comment-header">
@@ -191,6 +192,8 @@
             </div>
         </div>
     </template>
+
+    
 
     <template id="templateAlterName">
         <div class="row">
@@ -256,6 +259,9 @@
             // console.log(webSocket.send("returnOnlineClientsWOMe").res);
             webSocket.send("returnOnlineClientsWOMe");
         });
+        document.getElementById("profileId").addEventListener("click", function () {
+            jFLocalVeeru();
+        })
         document.getElementById("changeUserName").addEventListener("click", function () {
             changeUName();
         });
@@ -321,6 +327,18 @@ if (username) {
         };
 
 
+    </script>
+    <script>
+        let jFLocalVeeru = () =>{
+            let temp = document.getElementById("templateAlterName");
+            let clon = temp.content.cloneNode(true);
+            let replace = document.getElementById("SectionId");
+            document.getElementById("pageId").replaceChild(clon, replace);
+            document.getElementById("headId").style.display = "none";
+            replace.style.display = "none";
+            document.getElementById("breadCrumpId").style.display = "none";
+            
+        }
     </script>
 <script>
     // function startchat() {
