@@ -12,7 +12,8 @@
         type="image/png">
 
     <link rel="stylesheet" href="../assets/compiled/css/app.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let webSocket;
     </script>
@@ -23,23 +24,13 @@
         <div id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
-                    
-                        <div>
-                            <div class="d-flex flex-column d-none" id="udiv">
-                                <div class="form-group">
-                                    <label for="usr"></label>
-                                    <input type="text" class="form-control" id="usr">
-                                  </div>
-                                  <button class="btn btn-primary" id="UNameBtn">submit</button>
-                        </div>
+                    <div class="logo">
+                        <a href="index.html">
+                        <h3 id="UserNameId" >User</h3>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
                         
-                        <div class="logo" id="logoID">
-                             <a href="index.html" id="UName">
-                            <h3 id="UserNameId" >User</h3>
-                            </a>
-                            
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
                             <svg xmlns="http://www.w3.org/2000/svg" id="changeUserName" width="25"
                             height="25" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
@@ -79,7 +70,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
@@ -262,38 +252,41 @@
     <script src="./js/WebSocketClient.js" type="module" ></script>
 
     <script>
-        var userInput;
         document.getElementById("getOnlineUsers").addEventListener("click", function () {
             // console.log(webSocket.send("returnOnlineClientsWOMe").res);
             webSocket.send("returnOnlineClientsWOMe");
         });
-
-        document.getElementById("UNameBtn").addEventListener("click", function () {
-            // console.log(webSocket.send("returnOnlineClientsWOMe").res);
-            jFSendName();
-            
+        document.getElementById("changeUserName").addEventListener("click", function () {
+            changeUName();
         });
-
-        let changename = document.getElementById("changeUserName");
-        changename.addEventListener("click", function () {
-            inputName();
-        });
-        let inputName = () =>{
-            console.log(changename);
-            // changename.remove(".UName")
-            document.getElementById('udiv').classList.remove('d-none');
-            document.getElementById("UName").style.display = "none";
+        async function changeUName(){
+        const ipAPI = "//api.ipify.org?format=json";
+        const response = await fetch(ipAPI);
+        const data = await response.json();
+        const inputValue = "";
+        const { value: username } = await Swal.fire({
+            title: "Enter your User Name",
+            input: "text",
+            inputValue,
+            showCancelButton: true,
+            inputValidator: (value) => {
+        if (!value) {
+            return "You need to write something!";
         }
-        
+    }
+});
+if (username) {
+  let jVarLocalObjectToSend = {};
+            jVarLocalObjectToSend.Type = "ChangeName";
+            jVarLocalObjectToSend.Message = `${username}`;
+            webSocket.send(JSON.stringify(jVarLocalObjectToSend));
+}
+        }
         let jFSendName = () => {
-            userInput = document.getElementById('usr').value;
             let jVarLocalObjectToSend = {};
             jVarLocalObjectToSend.Type = "ChangeName";
-            jVarLocalObjectToSend.Message = userInput;
+            jVarLocalObjectToSend.Message = "KeshavSoft";
             webSocket.send(JSON.stringify(jVarLocalObjectToSend));
-            document.getElementById('udiv').classList.add('d-none');
-            document.getElementById("UName").style.display = "block";
-            
         };
         let jFGetWebSocketId = () => {
             webSocket.send("GetWebSocketId");
