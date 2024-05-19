@@ -12,7 +12,7 @@
         type="image/png">
 
     <link rel="stylesheet" href="../assets/compiled/css/app.css">
-
+    
     <script>
         let webSocket;
     </script>
@@ -23,13 +23,28 @@
         <div id="sidebar">
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="logo">
-                            <a href="index.html">
+                    
+                        <div>
+                            <div class="d-flex flex-column d-none" id="udiv">
+                                <div class="form-group">
+                                    <label for="usr"></label>
+                                    <input type="text" class="form-control" id="usr">
+                                  </div>
+                                  <button class="btn btn-primary" id="UNameBtn">submit</button>
+                        </div>
+                        
+                        <div class="logo" id="logoID">
+                             <a href="index.html" id="UName">
                             <h3 id="UserNameId" >User</h3>
                             </a>
+                            
                         </div>
+                        <div class="d-flex justify-content-between align-items-center">
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" id="changeUserName" width="25"
+                            height="25" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                              </svg>
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -64,6 +79,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
@@ -246,16 +262,38 @@
     <script src="./js/WebSocketClient.js" type="module" ></script>
 
     <script>
+        var userInput;
         document.getElementById("getOnlineUsers").addEventListener("click", function () {
             // console.log(webSocket.send("returnOnlineClientsWOMe").res);
             webSocket.send("returnOnlineClientsWOMe");
         });
 
+        document.getElementById("UNameBtn").addEventListener("click", function () {
+            // console.log(webSocket.send("returnOnlineClientsWOMe").res);
+            jFSendName();
+            
+        });
+
+        let changename = document.getElementById("changeUserName");
+        changename.addEventListener("click", function () {
+            inputName();
+        });
+        let inputName = () =>{
+            console.log(changename);
+            // changename.remove(".UName")
+            document.getElementById('udiv').classList.remove('d-none');
+            document.getElementById("UName").style.display = "none";
+        }
+        
         let jFSendName = () => {
+            userInput = document.getElementById('usr').value;
             let jVarLocalObjectToSend = {};
             jVarLocalObjectToSend.Type = "ChangeName";
-            jVarLocalObjectToSend.Message = "KeshavSoft";
+            jVarLocalObjectToSend.Message = userInput;
             webSocket.send(JSON.stringify(jVarLocalObjectToSend));
+            document.getElementById('udiv').classList.add('d-none');
+            document.getElementById("UName").style.display = "block";
+            
         };
         let jFGetWebSocketId = () => {
             webSocket.send("GetWebSocketId");
