@@ -1,8 +1,9 @@
 import { StartFunc as StartFuncChangeName } from "./ChangeName.js";
 import { StartFunc as StartFuncFromPeer } from "./FromPeer.js";
 import { StartFunc as StartFuncSendMessage } from "./SendMessage.js";
+import {StartFunc as StartFuncSendMessageToAll} from "./SendMessageToAll.js";
 
-let StartFunc = ({ inDataAsJson, inws, inClients }) => {
+let StartFunc = ({ inDataAsJson, inws, inClients, inWss }) => {
     let LocalDataAsJson = inDataAsJson;
 
     if ("Type" in LocalDataAsJson) {
@@ -16,6 +17,10 @@ let StartFunc = ({ inDataAsJson, inws, inClients }) => {
 
         if (LocalDataAsJson.Type === "sendMessage") {
             StartFuncSendMessage({ inDataToClientAsJson: LocalDataAsJson, inws: inws, inClients: inClients });
+        };
+        if (LocalDataAsJson.Type === "sendMessageToAll") {
+            console.log("StartFuncSendMessageToAll : ", LocalDataAsJson.Message);
+            StartFuncSendMessageToAll({ inDataToClientAsJson: LocalDataAsJson, inws, inClients, inWss});
         };
     };
 };

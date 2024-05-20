@@ -6,8 +6,6 @@ let wss;
 
 const clients = new Map();
 
-// let CommonSaveToJsonOnConnections = require("./LogHistory/OnConnection/EntryFile")
-
 let StartFunc = (server) => {
     wss = new WebSocketServer({ server });
 
@@ -15,14 +13,16 @@ let StartFunc = (server) => {
 };
 
 let WsOnConnection = (ws, req) => {
+
     CommoninsertToClients({
         inClients: clients,
         ws
     });
 
-    // let id = clients.get(ws).id;
+
     let localWebSocketData=clients.get(ws);
     console.log("localWebSocketData",localWebSocketData);
+
 
     ws.send(JSON.stringify({ type: 'GetWebSocketId', webSocketId: localWebSocketData.id }));
 
@@ -34,17 +34,14 @@ let WsOnConnection = (ws, req) => {
     // });
 
     ws.on('message', (data, isBinary) => {
-        let k1 = clients.get(ws);
-
+        
         CommonOnMessage({
             inData: data,
             inws: ws,
-            inClients: clients
+            inClients: clients,
+            inWss: wss
         });
 
-        setTimeout(function timeout() {
-            ws.send(Date.now());
-        }, 500);
     });
 
     ws.on('close', () => {
@@ -56,8 +53,6 @@ let WsOnConnection = (ws, req) => {
         clients.delete(ws);
         console.log("Number of users online: ", clients.size);
     });
-
-    
 
     ws.send(Date.now());
 };
