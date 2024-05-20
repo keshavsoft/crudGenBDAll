@@ -2,6 +2,7 @@ import { StartFunc as StartFuncMyName } from "./MyName.js";
 
 let StartFunc = (inEvent) => {
     const data = JSON.parse(inEvent.data);
+    console.log("data from server", data);
 
     if (data.type === 'returnOnlineClientsWOMe') {
         displayOnlineClients(data.res);
