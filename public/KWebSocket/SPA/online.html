@@ -25,17 +25,17 @@
             <div class="sidebar-wrapper active">
                 <div class="sidebar-header position-relative">
                     <div class="logo">
-                        <a href="index.html">
+                        <a id="changeUserName">
                         <h3 id="UserNameId" >User</h3>
                         </a>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         
                         <div class="theme-toggle d-flex gap-2  align-items-center mt-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" id="changeUserName" width="25"
+                            <!-- <svg xmlns="http://www.w3.org/2000/svg"  width="25"
                             height="25" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                 <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-                              </svg>
+                              </svg>-->
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                                 aria-hidden="true" role="img" class="iconify iconify--system-uicons" width="20"
                                 height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 21 21">
@@ -51,7 +51,7 @@
                                         </path>
                                     </g>
                                 </g>
-                            </svg>
+                            </svg> 
                             <div class="form-check form-switch fs-6">
                                 <input class="form-check-input  me-0" type="checkbox" id="toggle-dark"
                                     style="cursor: pointer">
@@ -93,10 +93,10 @@
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="../profile/profile.html" class='sidebar-link'>
+                            <p id="profileId" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
                                 <span>Profile</span>
-                            </a>
+                            </p>
                         </li>
                     </ul>
                 </div>
@@ -104,16 +104,16 @@
         </div>
 
         <div id="main">
-            <header class="mb-3">
+            <header class="mb-3" >
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
 
-            <div class="page-heading">
-                <div class="page-title">
+            <div class="page-heading" id="pageId">
+                <div class="page-title" >
                     <div class="row">
-                        <div class="col-12 col-md-6 order-md-1 order-last">
+                        <div class="col-12 col-md-6 order-md-1 order-last" id="headId">
                             <h3 id="OnlinePeopleId">Online People</h3>
 
                             <!-- <h3>Comment</h3>
@@ -122,7 +122,7 @@
                                 to comment on a post, image, or video.
                             </p> -->
                         </div>
-                        <div class="col-12 col-md-6 order-md-2 order-first">
+                        <div class="col-12 col-md-6 order-md-2 order-first" id="breadCrumpId">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
@@ -162,6 +162,7 @@
 
 
     </div>
+
     <template id="templateId">
         <div class="comment">
             <div class="comment-header">
@@ -191,6 +192,8 @@
             </div>
         </div>
     </template>
+
+    
 
     <template id="templateAlterName">
         <div class="row">
@@ -250,12 +253,16 @@
     </template>
 
     <script src="./js/WebSocketClient.js" type="module" ></script>
+    <script src="./js/create.js" type="module" ></script>
 
-    <script>
+    <!-- <script>
         document.getElementById("getOnlineUsers").addEventListener("click", function () {
             // console.log(webSocket.send("returnOnlineClientsWOMe").res);
             webSocket.send("returnOnlineClientsWOMe");
         });
+        document.getElementById("profileId").addEventListener("click", function () {
+            jFLocalVeeru();
+        })
         document.getElementById("changeUserName").addEventListener("click", function () {
             changeUName();
         });
@@ -292,8 +299,8 @@ if (username) {
             webSocket.send("GetWebSocketId");
 
         };
-    </script>
-    <script>
+    </script> -->
+    <!-- <script>
         let sendMsg = (event) => {
 
             // Traverse up the DOM tree to find the comment element
@@ -321,7 +328,19 @@ if (username) {
         };
 
 
-    </script>
+    </script> -->
+    <!-- <script>
+        let jFLocalVeeru = () =>{
+            let temp = document.getElementById("templateAlterName");
+            let clon = temp.content.cloneNode(true);
+            let replace = document.getElementById("SectionId");
+            document.getElementById("pageId").replaceChild(clon, replace);
+            document.getElementById("headId").style.display = "none";
+            replace.style.display = "none";
+            document.getElementById("breadCrumpId").style.display = "none";
+            
+        }
+    </script> -->
 <script>
     // function startchat() {
     // const chatContent = document.getElementById('chat-content');

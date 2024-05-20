@@ -19,7 +19,7 @@ let jFLocalEstablishWebSocket = () => {
     webSocket = new WebSocket(jVarLocalUrlForWS);
     webSocket.onopen = (event) => {
         console.log("WebSocket is open now.");
-        document.getElementById("OnlinePeopleId").style.color = "green";
+        document.getElementById("UserNameId").style.color = "green";
         webSocket.send("k1");
     };
 
@@ -27,7 +27,7 @@ let jFLocalEstablishWebSocket = () => {
 
     webSocket.onclose = function (e) {
         console.log("Socket is closed. Reconnect will be attempted in 1 second.");
-        document.getElementById("OnlinePeopleId").style.color = "red";
+        document.getElementById("UserNameId").style.color = "red";
     };
 };
 
