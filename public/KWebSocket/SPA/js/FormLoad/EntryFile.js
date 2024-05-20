@@ -1,8 +1,7 @@
-
-import { StartFunc as StartFucSendMessage } from "./ForDataList/SendMessage.js";
+import { StartFunc as StartFuncButtonId } from "./Addlisteners/EntryFile.js";
 
 const StartFunc = () => {
-    StartFucSendMessage();
+  StartFuncButtonId();
 };
 
-export { StartFunc };
+StartFunc();
