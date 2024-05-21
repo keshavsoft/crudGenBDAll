@@ -6,7 +6,6 @@ const StartFunc = () => {
 
 const jFLocalInitialize = () => {
     var $table = $('#table');
-
     $table.bootstrapTable({
         data: []
     });
