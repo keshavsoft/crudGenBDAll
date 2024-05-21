@@ -1,4 +1,5 @@
 import { StartFunc as StartFuncTableTag } from "./TableTag.js";
+
 const StartFunc = () => {
     StartFuncTableTag();
     jFLocalInitialize();

@@ -23,6 +23,4 @@ let StartFunc = (inEvent) => {
     };
 };
 
-
-
 export { StartFunc };

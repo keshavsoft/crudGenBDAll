@@ -11,10 +11,10 @@ let StartFunc = (data) => {
       chat.classList.add("chat-left");
       chatMessage.textContent = receivedMessage;
       chatContent.appendChild(template.content.cloneNode(true));
-    }
+    };
 
     return;
-  } catch (error) {}
+  } catch (error) { }
 
   var $table = $("#table");
   // $table.bootstrapTable();

@@ -6,7 +6,7 @@ let StartFunc = ({ inData, inws, inClients, inWss }) => {
     // console.log("LocalData : ", LocalData);
     try {
         let LocalDataAsJson = JSON.parse(LocalData);
-        console.log("Mwssage As Json : ",LocalDataAsJson);
+     
         CommonMessageAsJson({ inDataAsJson: LocalDataAsJson, inws, inClients, inWss });
 
         return;

@@ -12,8 +12,6 @@ const StartFunc = () => {
     $table.attr("data-id-field", "From");
     $table.attr("data-id-field", "Message");
     $table.attr("data-show-toggle", "true");
-    // $table.attr("data-url", "/bin/StichingPOS/DataOnly");
-
 };
 
 export { StartFunc };
