@@ -2,7 +2,7 @@ let StartFunc = () => {
   const chatContent = document.getElementById("chat-content");
   const inputMsg = document.getElementById("inputMsg");
   const msg = inputMsg.value;
-  let profileId = localStorage.getItem("currentMsgId");
+  // let profileId = localStorage.getItem("currentMsgId");
   if (msg) {
     inputMsg.value = "";
     const chat = document.createElement("div");

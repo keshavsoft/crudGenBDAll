@@ -12,6 +12,10 @@ let StartFunc = (event) => {
     .querySelector(".comment-body")
     .querySelector("#comment-messageId").textContent;
 
+  let profileName = commentElement
+  .querySelector(".comment-body")
+  .querySelector("#comment-profileNameId").textContent;
+
   // console.log("Profile ID:", profileId);
 
   // // Send your WebSocket message with the profile ID
@@ -32,6 +36,7 @@ let StartFunc = (event) => {
   replace.style.display = "none";
   document.getElementById("breadCrumpId").style.display = "none";
   document.getElementById("receiverId").innerHTML = profileId;
+  document.getElementById("receiverName").innerHTML = profileName;
 
   StartFuncAddListeners();
 };
