@@ -10,19 +10,20 @@ let StartFunc = (inData) => {
     cardBody.innerHTML = "";
 
     inData.forEach((user, loopIndex) => {
-        addComment(user.id, user.Name, loopIndex + 1);
+        addComment(user.id, user.Name, user.loginTime, loopIndex + 1);
     });
 
     StartFuncAddListeners();
 }
 
-function addComment(profileId, profileName, loopIndex) {
+function addComment(profileId, profileName, loginTime, loopIndex) {
     const template = document.getElementById('templateId');
 
     const cardBody = document.getElementById('card-bodyId');
     template.content.getElementById('comment-profileNameId').textContent = profileName;
     template.content.getElementById('comment-messageId').textContent = profileId;
-    template.content.getElementById('comment-timeId').textContent = loopIndex;
+    template.content.getElementById('comment-numberId').textContent = loopIndex;
+    template.content.getElementById('comment-timeId').textContent = loginTime;
     cardBody.appendChild(template.content.cloneNode(true));
 };
 
