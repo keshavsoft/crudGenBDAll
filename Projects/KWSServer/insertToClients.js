@@ -6,7 +6,7 @@ let StartFunc = ({ inClients, ws }) => {
   const Name = "Anonymous";
   const loginDateTime = getDate();
   const metadata = { id, color, Name, loginDateTime };
-
+  console.log("IP address of the connected user: ",ws._socket.remoteAddress);
   inClients.set(ws, metadata);
 };
 
