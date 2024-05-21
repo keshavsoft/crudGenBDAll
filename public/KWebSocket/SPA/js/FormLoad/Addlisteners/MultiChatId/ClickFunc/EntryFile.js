@@ -10,8 +10,8 @@ let StartFunc = () => {
   replace.style.display = "none";
   document.getElementById("breadCrumpId").style.display = "none";
 
-  StartFuncBuildBSTable()
-  StartFuncAddListeners();
+  StartFuncBuildBSTable();
+  // StartFuncAddListeners();
 };
 
 export { StartFunc };
