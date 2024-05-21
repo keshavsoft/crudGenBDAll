@@ -21,7 +21,7 @@ let WsOnConnection = (ws, req) => {
 
 
     let localWebSocketData=clients.get(ws);
-    console.log("localWebSocketData",localWebSocketData);
+    // console.log("localWebSocketData",localWebSocketData);
 
 
     ws.send(JSON.stringify({ type: 'GetWebSocketId', webSocketId: localWebSocketData.id }));
