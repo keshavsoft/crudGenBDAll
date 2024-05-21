@@ -29,12 +29,25 @@ function addComment(profileId, profileName, loginDateTime, loopIndex) {
 };
 
 function getDateTime(loginDateTime){
-    const {year, month, date, hours, minutes, seconds} = loginDateTime;
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    // const {year, month, date, hours, minutes, seconds} = loginDateTime;
+    // const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-    let TZ = hours >= 12 ? 'PM' : 'AM';
-    let hour = hours % 12 || 12;
-    return `${date} ${months[month]} ${year}, ${hour}:${minutes} ${TZ}`;
+    // let TZ = hours >= 12 ? 'PM' : 'AM';
+    // let hour = hours % 12 || 12;
+    // return `${date} ${months[month]} ${year}, ${hour}:${minutes} ${TZ}`;
+    const currentTime = new Date();
+    const login = new Date(loginDateTime);
+    // console.log("date is",login);
+    // console.log("date is",currentTime);
+    const diff = currentTime - login;
+    // console.log("diff is",diff);
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor(diff / 1000 / 60) % 60;
+    const remainingSeconds = Math.floor(diff / 1000) % 60;
+
+
+    // console.log("Bhaskar:   ",loginDateTime.getHours());
+    return `${hours} hours, ${minutes} minutes, ${remainingSeconds} seconds ago`;
 }
 
 export { StartFunc };

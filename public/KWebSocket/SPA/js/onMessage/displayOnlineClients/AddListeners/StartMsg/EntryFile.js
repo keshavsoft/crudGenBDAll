@@ -8,7 +8,7 @@ let StartFunc = () => {
     // });
 
     const elements = document.querySelectorAll('.sendMessageClass');
-    console.log(elements);
+    // console.log(elements);
     elements.forEach( el => {
         el.addEventListener('click', StartFuncClickFunc);
     });

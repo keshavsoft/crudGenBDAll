@@ -81,25 +81,25 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item  active">
-                            <a href="../online/online.html" class='sidebar-link'>
+                        <li class="sidebar-item  active" id="online">
+                            <p id = "onlineId"class='sidebar-link'>
                                 <i class="bi bi-check-circle-fill"></i>
                                 <span>Online</span>
-                            </a>
+                            </p>
                         </li>
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item" id="chat">
                             <p id="chatId" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
                                 <span>Chat</span>
                             </p>
                         </li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item" id="multichat">
                             <p id="MultiChatId" class='sidebar-link'>
                                 <i class="bi bi-broadcast"></i>
                                 <span>Multi-Chat</span>
                             </p>
                         </li>
-                        <li class="sidebar-item  ">
+                        <li class="sidebar-item" id="profile">
                             <p id="profileId" class='sidebar-link'>
                                 <i class="bi bi-person-circle"></i>
                                 <span>Profile</span>
@@ -381,6 +381,17 @@
         };
     </script>
 
+<script>
+    const sidebar = document.querySelectorAll('.sidebar-item');
+    sidebar.forEach(element => {
+        element.addEventListener('click', () => {
+            sidebar.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        });
+    });
+    console.log("online isisis ",online);
+    console.log("chat isisis ",chat);
+</script>
 </body>
 
 </html>

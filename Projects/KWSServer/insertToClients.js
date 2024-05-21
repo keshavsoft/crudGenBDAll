@@ -4,9 +4,10 @@ let StartFunc = ({ inClients, ws }) => {
   const id = uuidv4();
   const color = Math.floor(Math.random() * 360);
   const Name = "Anonymous";
-  const loginDateTime = getDate();
+  // const loginDateTime = getDate();
+  const loginDateTime = new Date();
   const metadata = { id, color, Name, loginDateTime };
-  console.log("IP address of the connected user: ",ws._socket.remoteAddress);
+  // console.log("IP address of the connected user: ",ws._socket.address());
   inClients.set(ws, metadata);
 };
 
@@ -31,6 +32,7 @@ function getDate() {
 
   return dateTime;
 }
+
 
 //module.exports = StartFunc;
 export { StartFunc };
