@@ -1,5 +1,5 @@
-import { StartFunc as StartFuncMyName } from "./MyName.js";
-import { StartFunc as displayReceivedMessage } from "./displayReceivedMessage.js";
+import { StartFunc as StartFuncMyName } from "./MyName/EntryFile.js";
+import { StartFunc as displayReceivedMessage } from "./displayReceivedMessage/EntryFile.js";
 import { StartFunc as displayOnlineClients } from "./displayOnlineClients/EntryFile.js";
 
 let StartFunc = (inEvent) => {
