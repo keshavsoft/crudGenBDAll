@@ -352,9 +352,9 @@
 
     <template id="templateMultiChat">
         <div class="row">
-            <div class="col-md-6">
-                <table id="table" class="table table-bordered">
-                    <thead class="thead-light">
+            <div class="col-md-10">
+                <table id="table" data-header-style="headerStyle">
+                    <thead class="text-capitalize text-bg-light">
                         <tr id="tableHeadRow">
                             <th data-field="id" data-formatter="jFGlobalSerialColumn">#</th>
                             <th data-field="From">From</th>
@@ -386,11 +386,28 @@
         function Datediff(date) {
             let date1 = new Date(date);
             let date2 = new Date();
-            let diffTime = Math.abs(date2 - date1);
-            let diffHours = Math.ceil(diffTime / (1000 * 60 * 60));
-            let diffMinutes = Math.ceil(diffTime / (1000 * 60 * 60 * 60));
-            let diffSeconds = Math.ceil(diffTime / (1000 * 60 * 60 * 60 * 60));
-            return diffHours + " Hours " + diffMinutes + " Minutes " + diffSeconds + " Seconds ago";
+            let diff =date2 - date1;
+            // console.log(diffTime);
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            const remainingSeconds = seconds % 60;
+            const remainingMinutes = minutes % 60;
+            let string = ""
+            if(hours > 0){
+                string += hours + " hours ";
+            }
+            if( remainingMinutes> 0){
+                string += remainingMinutes + " minutes ";
+            }
+            if(remainingSeconds > 0){
+                string += remainingSeconds + " seconds ago";
+            }
+            if(remainingSeconds ===0 && remainingMinutes===0 && hours ===0){
+                string = "Just now";
+            }
+            return string;
         }
     </script>
    <script>
@@ -403,6 +420,25 @@
         });
     });
 </script>
+<script>
+    function headerStyle(column) {
+      return {
+        id: {
+          classes: 'uppercase',
+          css:{background: 'LightBlue', color: 'Black'}
+        },
+        From: {
+          css: {background: 'LightBlue', color: 'Black'}
+        },
+        Message: {
+          css: {background: 'LightBlue', color: 'Black'}
+        },
+        Date: {
+          css: {background: 'LightBlue', color: 'Black'}
+        }
+      }[column.field]
+    }
+  </script>
 </body>
 
 </html>
