@@ -3,15 +3,28 @@ let StartFunc = (loginDateTime) => {
     const login = new Date(loginDateTime);
     // console.log("date is",login);
     // console.log("date is",currentTime);
-    const diff = currentTime - login;
-    // console.log("diff is",diff);
-    const hours = Math.floor(diff / 1000 / 60 / 60);
-    const minutes = Math.floor(diff / 1000 / 60) % 60;
-    const remainingSeconds = Math.floor(diff / 1000) % 60;
+    let diff =currentTime - login;
+            // console.log(diffTime);
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-
-    // console.log("Bhaskar:   ",loginDateTime.getHours());
-    return `${hours} hours, ${minutes} minutes, ${remainingSeconds} seconds ago`;
+    const remainingSeconds = seconds % 60;
+    const remainingMinutes = minutes % 60;
+    let string = ""
+    if(hours > 0){
+        string += hours + " hours ";
+    }
+    if( remainingMinutes> 0){
+        string += remainingMinutes + " minutes ";
+    }
+    if(remainingSeconds > 0){
+        string += remainingSeconds + " seconds ago";
+    }
+    if(remainingSeconds ===0 && remainingMinutes===0 && hours ===0){
+        string = "Just now";
+    }
+    return string;
 };
 
 export { StartFunc };
