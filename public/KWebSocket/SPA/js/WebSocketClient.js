@@ -1,4 +1,5 @@
 import { StartFunc as StartFunconMessage } from './onMessage/EntryFile.js';
+import {StartFunc as StartFunconOpen} from "./onOpen/EntryFile.js";
 
 let jVarLocalHostName = window.location.host;
 let jVarLocalUrlForWS;
@@ -17,11 +18,8 @@ let StartFunc = () => {
 
 let jFLocalEstablishWebSocket = () => {
     webSocket = new WebSocket(jVarLocalUrlForWS);
-    webSocket.onopen = (event) => {
-        console.log("WebSocket is open now.");
-        document.getElementById("UserNameId").style.color = "green";
-        webSocket.send("k1");
-    };
+    
+    webSocket.onopen = StartFunconOpen;
 
     webSocket.onmessage = StartFunconMessage;
 
