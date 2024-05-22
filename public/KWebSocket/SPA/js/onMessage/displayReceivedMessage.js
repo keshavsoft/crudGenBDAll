@@ -17,6 +17,8 @@ let StartFunc = (data) => {
   } catch (error) { }
 
   var $table = $("#table");
+  data.date = new Date()
+  console.log(data);
   // $table.bootstrapTable();
   addRow($table, data);
 };
@@ -30,6 +32,7 @@ function addRow($table, data) {
       id: 1,
       From: data.fromId,
       Message: data.Message,
+      Date: data.date,
     },
   });
 }
