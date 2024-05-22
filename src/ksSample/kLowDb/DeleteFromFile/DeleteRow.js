@@ -17,7 +17,7 @@ let StartFunc = async ({ inId }) => {
   const LocalFindId = LocalarrayOfObjects.find((obj) => obj.UuId === LocalId);
 
   if (LocalFindId === undefined) {
-    return await { KTF: false, KReason: "Id not found in data" };
+    return await { KTF: false, KReason: `Id : ${LocalId} not found in data` };
   };
 
   let LocalArrayAfterDelete = deleteObjectById({
