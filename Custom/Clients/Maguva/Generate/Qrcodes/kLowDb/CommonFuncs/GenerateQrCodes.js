@@ -2,6 +2,7 @@ import { StartFunc as StartFuncVouchers } from './FromVouchers/EntryFile.js';
 import { StartFunc as StartFuncPurchaseItems } from './FromPurchase/EntryFile.js';
 import { StartFunc as StartFuncwriteFileFromModal } from './FromGenerate/EntryFile.js';
 import { StartFunc as StartFuncCheck } from "./FromGenerate/Checks/CheckQrCodes.js";
+import { StartFunc as StartFuncItems } from './FromItems/EntryFile.js';
 
 let StartFunc = async ({ inId }) => {
     let LocalId = inId;
@@ -27,18 +28,26 @@ let StartFunc = async ({ inId }) => {
         return LocalReturnData;
     };
 
+    let LocalItemsData = await StartFuncItems();
+    //console.log("LocalItemsData",LocalItemsData);
+
     LocalPurchaseItemsData.forEach((element, index) => {
-        let LocalIndex = index + 1
-        LocalForEachFunc({ inVoucherData: LocalvouchepkData, itemData: element, index: LocalIndex });
+        let LocalIndex = index + 1;
+        let LocalItemRow = LocalItemsData.find(e => e.ItemName == element.ItemName);
+        LocalForEachFunc({ inVoucherData: LocalvouchepkData, itemData: element, index: LocalIndex,inFactor:LocalItemRow.Factor });
 
     });
     LocalReturnData.KTF = true;
     return LocalReturnData;
 };
 
-let LocalForEachFunc = ({ inVoucherData, itemData, index }) => {
-    let LocalQty = itemData.Qty;
-    for (let i = 0; i < itemData.Qty; i++) {
+let LocalForEachFunc = ({ inVoucherData, itemData, index ,inFactor}) => {
+    
+
+    //let LocalQty = itemData.Qty;
+    //changed by pavan 24-05-2024
+    let LocalQty = itemData.Qty*inFactor;
+    for (let i = 0; i < LocalQty; i++) {
 
         let LocalSendData = {};
         LocalSendData.CostPrice = itemData.UnitRate;
