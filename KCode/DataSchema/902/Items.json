@@ -7,5 +7,9 @@
     "GST": {
       "type": "STRING",
       "allowNull": true
+    },
+    "Factor": {
+      "type": "INTEGER",
+      "allowNull": false
     }
   }
