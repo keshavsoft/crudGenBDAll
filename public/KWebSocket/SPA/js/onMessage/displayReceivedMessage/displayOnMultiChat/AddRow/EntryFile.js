@@ -1,15 +1,17 @@
+import { StartFunc as StartFuncBuildMsgContainer } from "./BuildMsgContainer.js";
+import { StartFunc as StartFuncNewMsg } from "./NewMsg.js";
+let existinguser =[];
 let StartFunc = (inData) => {
-  var $table = $("#table");
-  inData.date = new Date();
-  $table.bootstrapTable("insertRow", {
-    index: 0,
-    row: {
-      id: 1,
-      From: inData.fromId,
-      Message: inData.Message,
-      Date: inData.date,
-    },
-  });
+    console.log(existinguser,inData.fromId);
+    if(existinguser.includes(inData.fromId)===false){
+        StartFuncBuildMsgContainer(inData);
+        existinguser.push(inData.fromId);
+    }
+
+    
+    console.log(existinguser,"after keeping");
+    StartFuncNewMsg(inData);
+
 };
 
 export { StartFunc };
